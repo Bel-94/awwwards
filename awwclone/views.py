@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .forms import profileForm,UserUpdateForm,RegistrationForm,projectForm,UpdateUserProfileForm,RateForm
 
-
+from .serializer import ProfileSerializer, ProjectSerializer
 # Create your views here.
 
 # function for the registration form
@@ -116,3 +116,14 @@ def rate(request,id):
         form = RateForm()
     return render(request,"rate.html",{"form":form,"project":project})  
 
+class ProfileList(APIView):
+    def get(self,request,format = None):
+        all_profile = Profile.objects.all()
+        serializerdata = ProfileSerializer(all_profile,many = True)
+        return Response(serializerdata.data)
+
+class ProjectList(APIView):
+    def get(self,request,format = None):
+        all_projects = Project.objects.all()
+        serializerdata = ProjectSerializer(all_projects,many = True)
+        return Response(serializerdata.data)
