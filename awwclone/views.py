@@ -100,7 +100,7 @@ def projects(request,id):
 
 # function fir rating and reviewing
 def rate(request,id):
-    # reviews = Revieww.objects.get(projects_id = id).all()
+    # reviews = Rateview.objects.get(projects_id = id).all()
     # print
     project = Project.objects.get(id = id)
     user = request.user

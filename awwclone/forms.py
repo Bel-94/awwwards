@@ -37,7 +37,7 @@ class RegistrationForm(UserCreationForm):
             user.save()
         return user
 
-# class RateForm(forms.ModelForm):
+class RateForm(forms.ModelForm):
     # text = forms.CharField(widget=forms.Textarea())
     # rate = forms.ChoiceField(choices=RATE_CHOICES,widget=forms.Select(),required=True)
 

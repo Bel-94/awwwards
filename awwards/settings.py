@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'awwclone',
     'cloudinary',
+    'star_ratings',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
