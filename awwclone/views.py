@@ -11,38 +11,38 @@ from .serializer import ProfileSerializer, ProjectSerializer
 # Create your views here.
 
 # function for the registration form
-def register(request):
-    if request.method=="POST":
-        form=RegistrationForm(request.POST)
-        procForm=profileForm(request.POST, request.FILES)
-        if form.is_valid() and procForm.is_valid():
-            username=form.cleaned_data.get('username')
-            user=form.save()
-            profile=procForm.save(commit=False)
-            profile.user=user
-            profile.save()
+# def register(request):
+#     if request.method=="POST":
+#         form=RegistrationForm(request.POST)
+#         procForm=profileForm(request.POST, request.FILES)
+#         if form.is_valid() and procForm.is_valid():
+#             username=form.cleaned_data.get('username')
+#             user=form.save()
+#             profile=procForm.save(commit=False)
+#             profile.user=user
+#             profile.save()
 
-            # messages.success(request, f'Successfully created Account!.You can now login as {username}!')
-        return redirect('login')
-    else:
-        form= RegistrationForm()
-        prof=profileForm()
-    params={
-        'form':form,
-        'profForm': prof
-    }
-    return render(request, 'users/register.html', params)
+#             # messages.success(request, f'Successfully created Account!.You can now login as {username}!')
+#         return redirect('login')
+#     else:
+#         form= RegistrationForm()
+#         prof=profileForm()
+#     params={
+#         'form':form,
+#         'profForm': prof
+#     }
+#     return render(request, 'register.html', params)
 
 
 def index(request):
     projects = Project.objects.all()
-    return render(request,'index.html',{"projects":projects})
+    return render(request, 'main/index.html', {"projects":projects})
 
 
 # function for creating a new profile
 def profile(request,id):
     prof = Profile.objects.get(user = id)
-    return render(request,'profile.html',{"profile":prof})
+    return render(request,'main/profile.html',{"profile":prof})
 
 # function for updating user profile
 def editprofile(request):
@@ -61,7 +61,7 @@ def editprofile(request):
         'user_form': user_form,
         'prof_form': prof_form
     }
-    return render(request, 'editprofile.html', params)
+    return render(request, 'main/editprofile.html', params)
 
 # function for searching the profile
 def searchprofile(request):
@@ -73,10 +73,10 @@ def searchprofile(request):
             'results': searchResults,
             'message': message
         }
-        return render(request, 'search.html', params)
+        return render(request, 'main/search.html', params)
     else:
         message = "You haven't searched for any profile"
-    return render(request, 'search.html', {'message': message})
+    return render(request, 'main/search.html', {'message': message})
 
 # function for adding a project
 def addProject(request):
@@ -88,15 +88,15 @@ def addProject(request):
             newProj = form.save(commit = False)
             newProj.user = user_profile
             newProj.save()
-        return redirect('home')  
+        return redirect('index')  
     else:
         form = projectForm()
-    return render(request,'newProject.html',{'form':form})    
+    return render(request,'main/newProject.html',{'form':form})    
 
 # function for readmore about the project
 def projects(request,id):
     proj = Project.objects.get(id = id)
-    return render(request,'readmore.html',{"projects":proj})
+    return render(request,'main/readmore.html',{"projects":proj})
 
 # function fir rating and reviewing
 def rate(request,id):
@@ -111,10 +111,10 @@ def rate(request,id):
             rate.user = user
             rate.projects = project
             rate.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = RateForm()
-    return render(request,"rate.html",{"form":form,"project":project})  
+    return render(request,"main/rate.html",{"form":form,"project":project})  
 
 class ProfileList(APIView):
     def get(self,request,format = None):
