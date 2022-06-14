@@ -1,6 +1,8 @@
-%include 'base.html'%}
+{%include 'main/base.html'%}
+{%load static%}
+{%load ratings %}
 {%block content%}
-{%load bootstrap3%}
+
 <div class="container" style="font-family: 'Jost', sans-serif;">
     <p>{{project.title}}</p>
     <p>{{project.description }}</p>
