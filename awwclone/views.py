@@ -91,7 +91,7 @@ def addProject(request):
         return redirect('index')  
     else:
         form = projectForm()
-    return render(request,'main/newProject.html',{'form':form})    
+    return render(request,'main/newproject.html',{'form':form})    
 
 # function for readmore about the project
 def projects(request,id):

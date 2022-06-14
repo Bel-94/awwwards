@@ -27,7 +27,7 @@ class Project(models.Model):
     description = models.TextField(max_length=350)
     projectscreenshot = CloudinaryField('images')
     projecturl = models.URLField(max_length=250)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner', null=True)
     datecreated = models.DateField(auto_now_add=True)
 
     def save_projects(self):
