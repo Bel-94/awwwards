@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'star_ratings',
     'rest_framework',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [

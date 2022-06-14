@@ -34,7 +34,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-default"
                     aria-labelledby="navbarDropdownMenuLink-333">
                     {% comment %} <a class="dropdown-item" href="{%url "login"%}">Login</a> {% endcomment %}
-                    <a class="dropdown-item" href="{% url "profile" %}">Profile</a>
+                    <a class="dropdown-item" href="{% url "profile" user.id %}">Profile</a>
                     {% comment %} <a class="dropdown-item" href="{%url "logout"%}">Logout</a> {% endcomment %}
                 </div>
             </li>
