@@ -4,17 +4,19 @@
 {%block content%}
 <div class="" style="font-family: 'Jost', sans-serif;">
     
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #557a95;">
 
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid" style="background-image: url('/static/img/background3.jpg');" >
             <div class="container">
-                <h2 class="display-4">Awwards</h2>
+                <h2 class="display-4" style="color: #116466" >Bone~Awwards</h2>
                 <p class="lead">Check out other peoples projects, Review and Rate them! You can also post yours to be reviewed!
                 </p>
             </div>
         </div>
+        
+    <div >
         <h3>Featured Projects</h3>
-        <div class="row">
+        <div class="row"  >
             {%for proj in projects%}
             <div class="col-md-3">
                 <div class="card">
@@ -33,5 +35,13 @@
             {%endfor%}
         </div>
     </div>
+    </div>
 </div>
+<br><br>
+<div class="container-fluid" style=" background-color: black; text-align: center; color: white;">
+    <footer> 
+       <p style="" > <small>&copy; Copyright 2022,All Rights Reserved</small> </p>
+       <p><small>Created by Belinda Ntinyari</small></p>
+    </footer> 
+    </div>
     {%endblock%}

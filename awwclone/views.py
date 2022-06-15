@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from . models import Profile, Project, Rateview
+from django.contrib.auth.decorators import login_required
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .forms import profileForm,UserUpdateForm,RegistrationForm,projectForm,UpdateUserProfileForm,RateForm
@@ -33,7 +37,7 @@ from .serializer import ProfileSerializer, ProjectSerializer
 #     }
 #     return render(request, 'register.html', params)
 
-
+@login_required(login_url="/accounts/login/")
 def index(request):
     projects = Project.objects.all()
     return render(request, 'main/index.html', {"projects":projects})
@@ -64,9 +68,10 @@ def editprofile(request):
     return render(request, 'main/editprofile.html', params)
 
 # function for searching the profile
+@login_required(login_url="/accounts/login/")
 def searchprofile(request):
-    if 'searchUser' in request.GET and request.GET['searchUser']:
-        name = request.GET.get("searchUser")
+    if 'search' in request.GET and request.GET['search']:
+        name = request.GET.get("search_term")
         searchResults = Project.search_projects(name)
         message = f'name'
         params = {
@@ -79,6 +84,7 @@ def searchprofile(request):
     return render(request, 'main/search.html', {'message': message})
 
 # function for adding a project
+@login_required(login_url="/accounts/login/")
 def addProject(request):
     current_user = request.user
     user_profile = Profile.objects.get(user = current_user)
@@ -117,13 +123,31 @@ def rate(request,id):
     return render(request,"main/rate.html",{"form":form,"project":project})  
 
 class ProfileList(APIView):
+    permission_classes = (IsAdminOrReadOnly)
+
     def get(self,request,format = None):
         all_profile = Profile.objects.all()
-        serializerdata = ProfileSerializer(all_profile,many = True)
-        return Response(serializerdata.data)
+        serializers = ProfileSerializer(all_profile,many = True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectList(APIView):
+    permission_classes = (IsAdminOrReadOnly)
+
     def get(self,request,format = None):
         all_projects = Project.objects.all()
-        serializerdata = ProjectSerializer(all_projects,many = True)
-        return Response(serializerdata.data)
+        serializers = ProjectSerializer(all_projects,many = True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)

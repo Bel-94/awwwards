@@ -37,8 +37,8 @@ class Project(models.Model):
         self.delete()
 
     @classmethod
-    def search_projects(cls, name):
-        return cls.objects.filter(title_icontains=name).all()
+    def search_projects(cls, search_term):
+        return cls.objects.filter(title_icontains=search_term).all()
 
 RATE_CHOICES = [
 (1,'1- Trash'),
