@@ -3,7 +3,7 @@
 <h2>By Belinda Ntinyari<h2>
 
 <p>A Django application where users can post a project they have created and its reviewed by others. API endpoints are provided and can only be accessed only when the user is logged in.</p>
-<img src="Screenshot from 2022-06-15 10-48-51.png">
+<img src="static/img/Screenshot from 2022-06-15 10-48-51.png">
 
 
 <h3>User Story</h3>
