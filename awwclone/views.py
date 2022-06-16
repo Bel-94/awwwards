@@ -71,18 +71,32 @@ def editprofile(request):
 
 # function for searching the profile
 @login_required(login_url="login")
-def searchproject(request):
-    if 'search' in request.GET and request.GET['search']:
-        search_term = request.GET.get("search")
-        searchResults = Project.search_projects(search_term)
-        message = f'search_term'
+# def searchproject(request):
+#     if 'search' in request.GET and request.GET['search']:
+#         search_term = request.GET.get("search")
+#         searchResults = Project.search_projects(search_term)
+#         message = f'search_term'
+#         params = {
+#             'results': searchResults,
+#             'message': message
+#         }
+#         return render(request, 'main/search.html', params)
+#     else:
+#         message = "You haven't searched for any projects"
+#     return render(request, 'main/search.html', {'message': message})
+
+def searchprofile(request):
+    if 'searchUser' in request.GET and request.GET['searchUser']:
+        name = request.GET.get("searchUser")
+        searchResults = Project.search_projects(name)
+        message = f'name'
         params = {
             'results': searchResults,
             'message': message
         }
         return render(request, 'main/search.html', params)
     else:
-        message = "You haven't searched for any projects"
+        message = "You haven't searched for any profile"
     return render(request, 'main/search.html', {'message': message})
 
 # function for adding a project

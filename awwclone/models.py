@@ -18,9 +18,9 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-    # @classmethod
-    # def search_profile(cls, search_term):
-    #     return cls.objects.filter(user_username_icontains=search_term).all()
+    @classmethod
+    def search_profile(cls, name):
+        return cls.objects.filter(user__username__icontains=name).all()
 
 class Project(models.Model):
     title = models.CharField(max_length=30)
@@ -37,8 +37,8 @@ class Project(models.Model):
         self.delete()
 
     @classmethod
-    def search_projects(cls, search_term):
-        return cls.objects.filter(title_icontains=search_term).all()
+    def search_projects(cls, name):
+        return cls.objects.filter(title__icontains=name).all()
 
 RATE_CHOICES = [
 (1,'1- Trash'),
