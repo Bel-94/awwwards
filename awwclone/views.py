@@ -106,7 +106,8 @@ def projects(request,id):
     proj = Project.objects.get(id = id)
     return render(request,'main/readmore.html',{"projects":proj})
 
-# function fir rating and reviewing
+# function for rating and reviewing
+@login_required(login_url="login")
 def rate(request,id):
     # reviews = Rateview.objects.get(projects_id = id).all()
     # print
