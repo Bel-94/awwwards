@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Empty div -->
       
-        <div class="col-md-6 mx-auto">
+        {% comment %} <div class="col-md-6 mx-auto">
             {% if form.errors %}
             <p> Some Information Might be Incorrect </p>
             {% endif %}
@@ -14,13 +14,13 @@
 
                 <div class="panel-heading">
                     <h3 class="text-center">Sign Up</h3>
-                </div>
+                </div> {% endcomment %}
                 <div class="panel-body">
 
                     <form action="{%url 'registration'%}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form form %}
-                        {% comment %} {% bootstrap_form profForm %} {% endcomment %}
+                        {% bootstrap_form profForm %}
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
                         </div>

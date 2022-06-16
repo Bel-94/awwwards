@@ -4,9 +4,9 @@
 {%block content%}
 <div class="" style="font-family: 'Jost', sans-serif;">
     
-    <div class="container-fluid" style="background-color: #557a95;">
+    <div class="container-fluid" id="index">
 
-        <div class="jumbotron jumbotron-fluid" style="background-image: url('/static/img/background3.jpg');" >
+        <div class="jumbotron jumbotron-fluid" id="dot" >
             <div class="container">
                 <h2 class="display-4" style="color: #116466" >Bone~Awwards</h2>
                 <p class="lead">Check out other peoples projects, Review and Rate them! You can also post yours to be reviewed!
@@ -15,7 +15,7 @@
         </div>
         
     <div >
-        <h3>Featured Projects</h3>
+        <h3 >Featured Projects</h3>
         <div class="row"  >
             {%for proj in projects%}
             <div class="col-md-3">

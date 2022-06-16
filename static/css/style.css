@@ -1,0 +1,17 @@
+#dot{
+    background-image: url('/static/img/background.webp');
+    background-repeat: no-repeat;
+    height: fit-content;
+}
+
+#index{
+    background-image: url('/static/img/background2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h3{
+    color: white;
+    font-weight: 900;
+    text-align: center;
+}
