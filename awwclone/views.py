@@ -36,7 +36,7 @@ def register(request):
         'form':form,
         'profForm': prof
     }
-    return render(request, 'users/register.html', params)
+    return render(request, 'registration/register.html', params)
 
 
 @login_required(login_url="login")
