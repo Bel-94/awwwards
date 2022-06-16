@@ -73,9 +73,9 @@ def editprofile(request):
 @login_required(login_url="login")
 def searchproject(request):
     if 'search' in request.GET and request.GET['search']:
-        title = request.GET.get("search_term")
-        searchResults = Project.search_projects(title)
-        message = f'name'
+        search_term = request.GET.get("search")
+        searchResults = Project.search_projects(search_term)
+        message = f'search_term'
         params = {
             'results': searchResults,
             'message': message
