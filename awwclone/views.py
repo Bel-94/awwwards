@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from . models import Profile, Project, Rateview
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,29 +16,30 @@ from .serializer import ProfileSerializer, ProjectSerializer
 # Create your views here.
 
 # function for the registration form
-# def register(request):
-#     if request.method=="POST":
-#         form=RegistrationForm(request.POST)
-#         procForm=profileForm(request.POST, request.FILES)
-#         if form.is_valid() and procForm.is_valid():
-#             username=form.cleaned_data.get('username')
-#             user=form.save()
-#             profile=procForm.save(commit=False)
-#             profile.user=user
-#             profile.save()
+def register(request):
+    if request.method=="POST":
+        form=RegistrationForm(request.POST)
+        procForm=profileForm(request.POST, request.FILES)
+        if form.is_valid() and procForm.is_valid():
+            username=form.cleaned_data.get('username')
+            user=form.save()
+            profile=procForm.save(commit=False)
+            profile.user=user
+            profile.save()
 
-#             # messages.success(request, f'Successfully created Account!.You can now login as {username}!')
-#         return redirect('login')
-#     else:
-#         form= RegistrationForm()
-#         prof=profileForm()
-#     params={
-#         'form':form,
-#         'profForm': prof
-#     }
-#     return render(request, 'register.html', params)
+            # messages.success(request, f'Successfully created Account!.You can now login as {username}!')
+        return redirect('login')
+    else:
+        form= RegistrationForm()
+        prof=profileForm()
+    params={
+        'form':form,
+        'profForm': prof
+    }
+    return render(request, 'users/register.html', params)
 
-@login_required(login_url="/accounts/login/")
+
+@login_required(login_url="login")
 def index(request):
     projects = Project.objects.all()
     return render(request, 'main/index.html', {"projects":projects})
@@ -68,7 +70,7 @@ def editprofile(request):
     return render(request, 'main/editprofile.html', params)
 
 # function for searching the profile
-@login_required(login_url="/accounts/login/")
+@login_required(login_url="login")
 def searchproject(request):
     if 'search' in request.GET and request.GET['search']:
         title = request.GET.get("search_term")
@@ -84,7 +86,7 @@ def searchproject(request):
     return render(request, 'main/search.html', {'message': message})
 
 # function for adding a project
-@login_required(login_url="/accounts/login/")
+@login_required(login_url="login")
 def addProject(request):
     current_user = request.user
     user_profile = Profile.objects.get(user = current_user)

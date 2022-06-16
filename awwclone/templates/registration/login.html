@@ -19,7 +19,7 @@
         </div>
         <div class="panel-body">
 
-          <form method="POST" style="color: lawngreen;" >
+          <form action="{%url 'login' %}" method="POST" style="color: lawngreen;" >
             {% csrf_token %}
             {% bootstrap_form form %}                   
             <br>
@@ -27,7 +27,7 @@
           </form>
           <br>
           <p class="text-white" >Do not have an account? <br>
-            <a href="{%url 'register'%}" style="color: white;" > Create an account here, 
+            <a href="{%url 'django_registration_register'%}" style="color: white;" > Create an account here, 
               <button class="btn btn-outline" style="background-color: lawngreen;" type="submit">Sign Up</button>
             </a></p>
           </div>

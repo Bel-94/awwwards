@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'star_ratings',
     'rest_framework',
     'bootstrap4',
-    'django_registration',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +147,5 @@ cloudinary.config(
   api_key = config('CLOUD_API_KEY'), 
   api_secret = config('CLOUD_API_SECRET') 
 )
+
+LOGIN_REDIRECT_URL = '/'
