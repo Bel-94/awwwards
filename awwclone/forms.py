@@ -22,7 +22,7 @@ class UpdateUserProfileForm(forms.ModelForm):
 class projectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','projectscreenshot','projecturl']
+        fields = ['title','description','projectscreenshot','projecturl', 'owner']
 class RegistrationForm(UserCreationForm):
     email=forms.EmailField()
     class Meta:
