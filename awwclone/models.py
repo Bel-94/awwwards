@@ -18,9 +18,9 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-    @classmethod
-    def search_profile(cls, name):
-        return cls.objects.filter(user_username_icontains=name).all()
+    # @classmethod
+    # def search_profile(cls, name):
+    #     return cls.objects.filter(user_username_icontains=name).all()
 
 class Project(models.Model):
     title = models.CharField(max_length=30)

@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'star_ratings',
     'rest_framework',
-    'bootstrap4'
+    'bootstrap4',
+    'django_registration',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,14 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'HOST' : config('DB_HOST'),
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': ( 
+        'rest_framework.permissions.IsAdminUser'),
 }
 
 

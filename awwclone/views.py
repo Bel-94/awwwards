@@ -69,10 +69,10 @@ def editprofile(request):
 
 # function for searching the profile
 @login_required(login_url="/accounts/login/")
-def searchprofile(request):
+def searchproject(request):
     if 'search' in request.GET and request.GET['search']:
-        name = request.GET.get("search_term")
-        searchResults = Project.search_projects(name)
+        title = request.GET.get("search_term")
+        searchResults = Project.search_projects(title)
         message = f'name'
         params = {
             'results': searchResults,
@@ -80,7 +80,7 @@ def searchprofile(request):
         }
         return render(request, 'main/search.html', params)
     else:
-        message = "You haven't searched for any profile"
+        message = "You haven't searched for any projects"
     return render(request, 'main/search.html', {'message': message})
 
 # function for adding a project
@@ -123,7 +123,7 @@ def rate(request,id):
     return render(request,"main/rate.html",{"form":form,"project":project})  
 
 class ProfileList(APIView):
-    permission_classes = (IsAdminOrReadOnly)
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get(self,request,format = None):
         all_profile = Profile.objects.all()
@@ -138,7 +138,7 @@ class ProfileList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectList(APIView):
-    permission_classes = (IsAdminOrReadOnly)
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get(self,request,format = None):
         all_projects = Project.objects.all()
